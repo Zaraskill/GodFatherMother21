@@ -14,11 +14,11 @@ public class GameOverConditions : MonoBehaviour
 
     void Update()
     {
-        CheckPlayerHealth();
+        CheckPlayerMovementSpeed();
     }
-    public void CheckPlayerHealth()
+    public void CheckPlayerMovementSpeed()
     {
-        if (playerStats.health == 0)
+        if (playerStats.movementSpeed == 0)
         {
             hasLost = true;
             //Debug.Log($"GameOver: hasLost");

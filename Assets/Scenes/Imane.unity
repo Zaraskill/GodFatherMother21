@@ -635,8 +635,8 @@ GameObject:
   - component: {fileID: 408757691}
   - component: {fileID: 408757701}
   - component: {fileID: 408757697}
-  - component: {fileID: 408757699}
   - component: {fileID: 408757698}
+  - component: {fileID: 408757699}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -766,10 +766,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 0
-  buffTimer: 5
-  movementSpeedBoost: 2
+  oxygenCapacity: 15
+  movementSpeedBoost: 15
   hasOxygenBuff: 0
-  hasChronoStarted: 0
 --- !u!114 &408757698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,7 +781,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f459996ee172914ca76bc6f6ae61c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healingAmount: 5
+  playerID: 0
+  movementSpeedBoost: 10
 --- !u!114 &408757699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -809,12 +809,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 10
-  health: 100
-  healthDecreaseValue: 5
-  timerBeforeDecrease: 5
+  speedDecreaseValue: 0.5
+  timerBeforeSpeedDecrease: 5
   hasPacemaker: 0
   hasOxygen: 1
-  hasCachet: 0
+  hasCachet: 1
+  minSpeedValue: 0
+  maxSpeedValue: 50
 --- !u!114 &408757701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,7 +830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   buffTimer: 5
-  movementSpeedBoost: 2
+  movementSpeedBoost: 15
   hasPacemakerBuff: 0
 --- !u!1 &473790822
 GameObject:

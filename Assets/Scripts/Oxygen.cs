@@ -10,13 +10,11 @@ public class Oxygen : MonoBehaviour
     private Pacemaker pacemaker;
     [Header("Oxygen Properties")]
     [SerializeField] private int playerID = 0;
-    [SerializeField] public float buffTimer = 5f;
-    [SerializeField] public float movementSpeedBoost = 2f;
+    [SerializeField] public float oxygenCapacity = 15f;
+    [SerializeField] public float movementSpeedBoost = 15f;
     private Player playerEntity;
     private float initialPlayerMovementSpeed;
-    private float resetTimer = 5f;
     public bool hasOxygenBuff;
-    public bool hasChronoStarted;
     void Start()
     {
         playerEntity = ReInput.players.GetPlayer(playerID);
@@ -30,7 +28,7 @@ public class Oxygen : MonoBehaviour
     {
         if (playerStats.hasOxygen) Debug.Log("Oxygen Available");
         // Si le joueur obtient de l'oxygène et n'est pas buff
-        if (playerStats.hasOxygen && !hasOxygenBuff && !pacemaker.hasPacemakerBuff)
+        if (playerStats.hasOxygen && !pacemaker.hasPacemakerBuff)
         {
             ActivateMovementSpeedBoost();
         }
@@ -42,12 +40,19 @@ public class Oxygen : MonoBehaviour
         if (playerEntity.GetAxis("ItemOne") == 1)
         {
             hasOxygenBuff = true;
-            playerStats.movementSpeed *= movementSpeedBoost;
-            // On lance le chrono
-            if (!hasChronoStarted)
+            oxygenCapacity--;
+            Debug.Log(oxygenCapacity);
+
+            if (!CheckOxygenCapacity()) return;
+
+            playerStats.movementSpeed = Mathf.Clamp(playerStats.movementSpeed + movementSpeedBoost, playerStats.minSpeedValue, playerStats.maxSpeedValue);
+        }
+        else
+        {
+            hasOxygenBuff = false;
+            if (playerStats.movementSpeed > initialPlayerMovementSpeed)
             {
-                hasChronoStarted = true;
-                StartCoroutine(StartChrono());
+                DeactivateMovementSpeedBoost();
             }
         }
     }
@@ -56,43 +61,13 @@ public class Oxygen : MonoBehaviour
         playerStats.movementSpeed = initialPlayerMovementSpeed;
     }
 
-    IEnumerator StartChrono()
+    bool CheckOxygenCapacity()
     {
-
-        if (playerEntity.GetAxis("ItemOne") != 1)
+        if (oxygenCapacity == 0)
         {
             hasOxygenBuff = false;
-            // Sinon si et Si aucun autre buff est en cours
-            if (!pacemaker.hasPacemakerBuff && !hasOxygenBuff)
-            {
-                DeactivateMovementSpeedBoost();
-            }
+            Debug.Log("Oxygen Unavailable");
         }
-        else
-        {
-            Debug.Log("Oxygen Used !");
-            hasOxygenBuff = true;
-            playerStats.movementSpeed = initialPlayerMovementSpeed;
-            playerStats.movementSpeed *= movementSpeedBoost;
-        }
-       
-        //hasChronoStarted = true;
-        yield return new WaitForSeconds(1f);
-
-        if (buffTimer != 0)
-        {
-            buffTimer--;
-            StartCoroutine(StartChrono());
-        }
-        else
-        {
-            // Ramener la vitesse du joueur à la normale lorsque le chrono arrive à 0
-            Debug.Log("Oxygen : Movement Speed Bonus Faiding");
-            DeactivateMovementSpeedBoost();
-            playerStats.hasOxygen = false;
-            hasOxygenBuff = false;
-            buffTimer = resetTimer;
-            hasChronoStarted = false;
-        }
+        return (hasOxygenBuff);
     }
 }
