@@ -1,3 +1,4 @@
+using Rewired;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,25 +7,27 @@ public class Cachet : MonoBehaviour
 {
     // Restore the character's life
     private PlayerStats playerStats;
+    private Player playerEntity;
     [Header("Cachet Properties")]
-    [SerializeField] public float healingAmount = 5f;
-    private float minValue = 0f, maxValue = 100f;
+    [SerializeField] private int playerID = 0;
+    [SerializeField] public float movementSpeedBoost = 10f;
     void Start()
     {
+        playerEntity = ReInput.players.GetPlayer(playerID);
         playerStats = GetComponent<PlayerStats>();
     }
 
     void Update()
     {
-        if (playerStats.hasCachet)
+        if (playerStats.hasCachet && playerEntity.GetAxis("ItemTwo") == 1)
         {
             AudioManager.PlayAudioAsset(AudioManager.ClipsName.CACHET, null);
-            HealPlayer();
+            IncreasePlayerMovementSpeed();
         }
     }
-    void HealPlayer()
+    void IncreasePlayerMovementSpeed()
     {
-        playerStats.health = Mathf.Clamp(playerStats.health + healingAmount, minValue, maxValue);
+        playerStats.movementSpeed = Mathf.Clamp(playerStats.movementSpeed + movementSpeedBoost, playerStats.minSpeedValue, playerStats.maxSpeedValue);
         playerStats.hasCachet = false;
     }
 }

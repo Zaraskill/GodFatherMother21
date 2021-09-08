@@ -7,12 +7,11 @@ public class PlayerStats : MonoBehaviour
     [Header("Player Stats")]
     private PlayerController playerController;
     [SerializeField] public float movementSpeed = 0f;
-    [SerializeField] public float health = 0f;
-    [SerializeField] public float healthDecreaseValue = 5f;
-    [SerializeField] public float timerBeforeDecrease = 5f;
+    [SerializeField] public float speedDecreaseValue = 0.5f;
+    [SerializeField] public float timerBeforeSpeedDecrease = 5f;
     public bool hasPacemaker, hasOxygen, hasCachet;
 
-    private float minValue = 0f, maxValue = 100f;
+    public float minSpeedValue = 0f, maxSpeedValue = 50f;
     private GameOverConditions gameOver;
 
     private Oxygen oxygen;
@@ -21,30 +20,32 @@ public class PlayerStats : MonoBehaviour
    
     void Start()
     {
+        // Le joueur démarre avec un cachet
+        hasCachet = true;
+
         playerController = GetComponent<PlayerController>();
         gameOver = GetComponent<GameOverConditions>();
         oxygen = GetComponent<Oxygen>();
         pacemaker = GetComponent<Pacemaker>();
         cachet = GetComponent<Cachet>();
 
-        StartCoroutine(DecreaseHealthOvertime());
+        StartCoroutine(DecreaseSpeedOvertime());
     }
 
     void Update()
     {
         playerController.forwardSpeed = movementSpeed;
         Debug.Log($"Current Player Speed: "+playerController.forwardSpeed);
-        PlayCorrespondingSound();
+        //PlayCorrespondingSound();
     }
-    IEnumerator DecreaseHealthOvertime()
+    IEnumerator DecreaseSpeedOvertime()
     {
         if (!gameOver.hasLost)
         {
-            yield return new WaitForSeconds(timerBeforeDecrease);
-            health = Mathf.Clamp(health - healthDecreaseValue, minValue, maxValue);
-            //Debug.Log($"health: " + health);
-            gameOver.CheckPlayerHealth();
-            StartCoroutine(DecreaseHealthOvertime());
+            yield return new WaitForSeconds(timerBeforeSpeedDecrease);
+            movementSpeed = Mathf.Clamp(movementSpeed - speedDecreaseValue, minSpeedValue, maxSpeedValue);
+            gameOver.CheckPlayerMovementSpeed();
+            StartCoroutine(DecreaseSpeedOvertime());
         }
         else
         {

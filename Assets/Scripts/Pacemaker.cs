@@ -39,13 +39,9 @@ public class Pacemaker : MonoBehaviour
  
     void ActivateMovementSpeedBoost()
     {
-        // Si on maintient la touche sachant que le joueur possède un pacemaker
-        /*if (playerEntity.GetAxis("ItemTwo") == 1)
-        {*/
-            Debug.Log("Pacemaker Used !");
-            playerStats.movementSpeed *= movementSpeedBoost;
-            StartCoroutine(StartChrono());
-        //}
+        Debug.Log("Pacemaker Used !");
+        playerStats.movementSpeed = Mathf.Clamp(playerStats.movementSpeed * movementSpeedBoost, playerStats.minSpeedValue, playerStats.maxSpeedValue);
+        StartCoroutine(StartChrono());
     }
     void DeactivateMovementSpeedBoost()
     {
