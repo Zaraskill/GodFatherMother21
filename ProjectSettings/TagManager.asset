@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - TurnZone
+  - OldPeople
   layers:
   - Default
   - TransparentFX
