@@ -18,6 +18,7 @@ public class Cachet : MonoBehaviour
     {
         if (playerStats.hasCachet)
         {
+            AudioManager.PlayAudioAsset(AudioManager.ClipsName.CACHET, null);
             HealPlayer();
         }
     }

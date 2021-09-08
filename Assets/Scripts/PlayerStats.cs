@@ -11,18 +11,21 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float healthDecreaseValue = 5f;
     [SerializeField] public float timerBeforeDecrease = 5f;
     public bool hasPacemaker, hasOxygen, hasCachet;
+
     private float minValue = 0f, maxValue = 100f;
     private GameOverConditions gameOver;
+
+    private Oxygen oxygen;
+    private Pacemaker pacemaker;
+    private Cachet cachet;
    
     void Start()
     {
-        /*hasPacemaker = true;
-        hasOxygen = true;
-        hasCachet = false;
-        isAlreadyBuffed = false;*/
-
         playerController = GetComponent<PlayerController>();
         gameOver = GetComponent<GameOverConditions>();
+        oxygen = GetComponent<Oxygen>();
+        pacemaker = GetComponent<Pacemaker>();
+        cachet = GetComponent<Cachet>();
 
         StartCoroutine(DecreaseHealthOvertime());
     }
@@ -31,6 +34,7 @@ public class PlayerStats : MonoBehaviour
     {
         playerController.forwardSpeed = movementSpeed;
         Debug.Log($"Current Player Speed: "+playerController.forwardSpeed);
+        PlayCorrespondingSound();
     }
     IEnumerator DecreaseHealthOvertime()
     {
@@ -45,6 +49,17 @@ public class PlayerStats : MonoBehaviour
         else
         {
             //Debug.Log($"Player has lost");
+        }
+    }
+    void PlayCorrespondingSound()
+    {
+        if (oxygen.hasOxygenBuff)
+        {
+            AudioManager.PlayAudioAsset(AudioManager.ClipsName.OXYGEN_OPENING, null);
+        }
+        if (pacemaker.hasPacemakerBuff)
+        {
+            AudioManager.PlayAudioAsset(AudioManager.ClipsName.WHEELCHAIR_RUN, null);
         }
     }
 }

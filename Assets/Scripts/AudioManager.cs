@@ -19,9 +19,26 @@ public class AudioManager : MonoBehaviour {
 
 	//n'oubliez pas de mettre vos codes ici !!
 	public enum ClipsName{
-		SHOT,
-		ARROW,
-		HORROR
+		WHEELCHAIR_WALK,
+		WHEELCHAIR_RUN,
+		OXYGEN_OPENING,
+		OXYGEN_CLOSING,
+		CACHET,
+		GAMEOVER,
+		VICTORY,
+		STEAL,
+		GRAMP_SHOUT,
+		GRAN_SHOUT,
+		DOOR_OPENING,
+		DOOR_CLOSING,
+		NURSE_INCOMING,
+		CRAZY_LAUGH,
+		CLICK,
+		MENU_CLOSING,
+		MENU_SCROLLING,
+		MENU_BACKGROUND,
+		LEVEL_BACKGROUND,
+		PUNCH
 	}
 	private static AudioManager instance = null;
 
