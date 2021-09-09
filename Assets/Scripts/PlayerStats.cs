@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [Header("Player Stats")]
-    private PlayerController playerController;
+    [HideInInspector] public PlayerController playerController;
     [SerializeField] public float movementSpeed = 1f;
     [SerializeField] public float secondsBeforeDecrease = 1f;
     [Tooltip("Speed decrease value < 1.")]
@@ -19,17 +19,19 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float speedDecreaseValue_4 = 0.125f;
     public bool hasPacemaker, hasOxygen, hasCachet;
     public float minSpeedValue = 0f, maxSpeedValue = 4f;
+    private bool isRunning;
     [SerializeField] public float value_1, value_2, value_3, value_4;
 
-    private GameOverConditions gameOver;
-    private Oxygen oxygen;
-    private Pacemaker pacemaker;
-    private Cachet cachet;
+    [HideInInspector] public GameOverConditions gameOver;
+    [HideInInspector] public Oxygen oxygen;
+    [HideInInspector] public Pacemaker pacemaker;
+    [HideInInspector] public Cachet cachet;
    
     void Start()
     {
         // Le joueur démarre avec un cachet
         hasCachet = true;
+        isRunning = false;
 
         playerController = GetComponent<PlayerController>();
         gameOver = GetComponent<GameOverConditions>();
@@ -43,8 +45,7 @@ public class PlayerStats : MonoBehaviour
     void Update()
     {
         playerController.forwardSpeed = movementSpeed;
-        //Debug.Log($"Current Player Speed: "+playerController.forwardSpeed);
-        //PlayCorrespondingSound();
+        //StartCoroutine(PlayerAudio());
     }
     IEnumerator DecreaseSpeedOvertime()
     {
@@ -70,6 +71,32 @@ public class PlayerStats : MonoBehaviour
             }
             gameOver.CheckPlayerMovementSpeed();
             StartCoroutine(DecreaseSpeedOvertime());
+        }
+    }
+    IEnumerator PlayerAudio()
+    {
+        if (playerController.forwardSpeed >= value_2)
+        {
+            AudioManager.StopPlayAudioAsset(AudioManager.ClipsName.WHEELCHAIR_WALK, null);
+            yield return new WaitForSeconds(1f);
+            if (!isRunning)
+            {
+                isRunning = true;
+                AudioManager.PlayAudioAsset(AudioManager.ClipsName.WHEELCHAIR_RUN, null);
+            }
+            StartCoroutine(PlayerAudio());
+        }
+        else 
+        {
+
+            AudioManager.StopPlayAudioAsset(AudioManager.ClipsName.WHEELCHAIR_RUN, null);
+            yield return new WaitForSeconds(1f);
+            if (isRunning)
+            {
+                isRunning = false;
+                AudioManager.PlayAudioAsset(AudioManager.ClipsName.WHEELCHAIR_WALK, null);
+            }
+            StartCoroutine(PlayerAudio());
         }
     }
 }

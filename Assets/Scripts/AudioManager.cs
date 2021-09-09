@@ -71,22 +71,24 @@ public class AudioManager : MonoBehaviour {
 	public static void StopPlayAudioAsset(AudioManager.ClipsName enumCode, GameObject user = null)
 	{
 		/*** récupération de l'AudioAsset demandé ***/
-		/*AudioAsset assetToUse = null;
+		AudioAsset assetToUse = null;
 		foreach (AudioAsset asset in instance.assets)
 		{
 			if (asset.enumCode == enumCode)
 			{
 				assetToUse = asset;
-			}
-		}*/
-
-		/**** sélection d'une AudioSource disponible ***/
-		foreach (AudioSource source in instance.sourcesBruitages) { 
-			/***** on stop le son ***********/
-			if (source.isPlaying) {
-				Debug.Log(source.clip.name);
-				Debug.Log("Stopped");
-				source.Stop();
+				//Debug.Log(assetToUse.clip);
+				/**** sélection d'une AudioSource disponible ***/
+				foreach (AudioSource source in instance.sourcesBruitages)
+				{
+					/***** on stop le son ***********/
+					if (source.clip.name == assetToUse.clip.name)
+					{
+						//Debug.Log(source.clip.name + " Stopped");
+						source.Stop();
+						break;
+					}
+				}
 			}
 		}
 	}
@@ -140,9 +142,8 @@ public class AudioManager : MonoBehaviour {
 					{
 						if (assetToUse.clip == source.clip)
 						{
-							/*Debug.Log(source.clip.name);
-							Debug.Log(source.volume);*/
-							sourceToUse.PlayOneShot(assetToUse.clip, source.volume);
+							//Debug.Log("Source clip name: " + source.clip.name + " played with " + sourceToUse.volume);
+							sourceToUse.PlayOneShot(assetToUse.clip, sourceToUse.volume);
 							//sourceToUse.PlayOneShot(assetToUse.clip);
 						}
 					}

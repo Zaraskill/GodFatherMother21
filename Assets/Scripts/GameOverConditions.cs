@@ -6,14 +6,22 @@ public class GameOverConditions : MonoBehaviour
 {
     private PlayerStats playerStats;
     public bool hasLost;
+    public bool playOnce;
     void Start()
     {
-        //hasLost = false;
         playerStats = GetComponent<PlayerStats>();
+        playOnce = false;
     }
 
     void Update()
     {
+        if (hasLost && !playOnce)
+        {
+            playerStats.movementSpeed = 0f;
+            playOnce = true;
+            AudioManager.StopMusic();
+            AudioManager.PlayAudioAsset(AudioManager.ClipsName.GAMEOVER, null);
+        }
         CheckPlayerMovementSpeed();
     }
     public void CheckPlayerMovementSpeed()
@@ -21,13 +29,6 @@ public class GameOverConditions : MonoBehaviour
         if (playerStats.movementSpeed == 0)
         {
             hasLost = true;
-            //Debug.Log($"GameOver: hasLost");
         }
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        hasLost = true;
-        //Debug.Log($"GameOver (col) : hasLost");
-    }
-
 }

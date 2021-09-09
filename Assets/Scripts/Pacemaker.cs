@@ -8,6 +8,7 @@ public class Pacemaker : MonoBehaviour
 {
     private PlayerStats playerStats;
     private Oxygen oxygen;
+    private GameOverConditions gameOverConditions;
     [Header("Pacemaker Properties")]
     [SerializeField] public float buffTimer = 5f;
     [SerializeField] public float movementSpeedBoost = 0.3f;
@@ -17,19 +18,31 @@ public class Pacemaker : MonoBehaviour
     {
         playerStats = GetComponent<PlayerStats>();
         oxygen = GetComponent<Oxygen>();
+        gameOverConditions = GetComponent<GameOverConditions>();
     }
 
     void Update()
     {
-        if (playerStats.hasPacemaker) Debug.Log("Pacemaker Available");
-
-        if (playerStats.hasPacemaker && !hasPacemakerBuff)
+        if (!gameOverConditions.hasLost)
         {
-            // Si aucun autre buff est en cours
-            if (!oxygen.hasOxygenBuff)
-            ActivateMovementSpeedBoost();
+            if (playerStats.hasPacemaker)
+            {
+                Debug.Log("Pacemaker Available");
+            }
+
+            if (playerStats.hasPacemaker && !hasPacemakerBuff)
+            {
+                // Si aucun autre buff est en cours
+                if (!oxygen.hasOxygenBuff)
+                    ActivateMovementSpeedBoost();
+            }
+        }
+        else
+        {
+            StopAllCoroutines();
         }
     }
+  
  
     void ActivateMovementSpeedBoost()
     {
@@ -40,6 +53,7 @@ public class Pacemaker : MonoBehaviour
     {
         hasPacemakerBuff = true;
         yield return new WaitForSeconds(1f);
+        AudioManager.PlayAudioAsset(AudioManager.ClipsName.WHEELCHAIR_RUN, null);
 
         if (buffTimer != 0)
         {
@@ -54,6 +68,7 @@ public class Pacemaker : MonoBehaviour
             playerStats.hasPacemaker = false;
             hasPacemakerBuff = false;
             buffTimer = resetTimer;
+            AudioManager.StopPlayAudioAsset(AudioManager.ClipsName.WHEELCHAIR_RUN, null);
         }
     }
 }
