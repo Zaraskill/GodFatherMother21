@@ -10620,6 +10620,38 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: value_1
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: value_2
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: value_3
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: value_4
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: hasCachet
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: hasOxygen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: hasPacemaker
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: maxSpeedValue
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: movementSpeed
       value: 10
       objectReference: {fileID: 0}
@@ -10702,6 +10734,18 @@ PrefabInstance:
     - target: {fileID: 5395579063708254973, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529072371926825099, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: oxygenCapacity
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529072371926825099, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: movementSpeedBoost
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8529072371926825099, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: oxygenCapacityDecreaseValue
+      value: 33
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
