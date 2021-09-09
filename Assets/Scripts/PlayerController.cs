@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private InputQTE goodInput;
     private bool isQTESuccess = false;
     private OldPerson oldMan;
+    private GameObject turnZone;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +35,6 @@ public class PlayerController : MonoBehaviour
     {
         if (isInQTE)
         {
-            Debug.Log("QTE");
             if(playerEntity.GetButtonDown("QTEA") && goodInput == InputQTE.QTEA)
             {
                 isQTESuccess = true;
@@ -72,7 +72,6 @@ public class PlayerController : MonoBehaviour
                         break;
                 }
                 oldMan = null;
-                Debug.Log("QTE");
             }
         }
         if (canTurn)
@@ -86,7 +85,10 @@ public class PlayerController : MonoBehaviour
             if(-1==rotation  || rotation==1 )
             {
                 gameObject.transform.Rotate(new Vector3(0,90,0)*rotation);
+                Debug.Log(turnZone);
+                gameObject.transform.position = turnZone.transform.position;
                 canTurn = false;
+                turnZone = null;
             }
         }
 
@@ -97,8 +99,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag.Equals("TurnZone"))
         {
-            Debug.Log("turn");
             canTurn = true;
+            turnZone = other.gameObject;
         }
         if (other.tag.Equals("OldPeople"))
         {
@@ -113,6 +115,7 @@ public class PlayerController : MonoBehaviour
         if (other.tag.Equals("TurnZone"))
         {
             canTurn = false;
+            turnZone = null;
         }
         if (other.tag.Equals("OldPeople"))
         {
