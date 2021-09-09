@@ -12566,11 +12566,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: hasCachet
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: hasOxygen
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: hasPacemaker
@@ -12789,7 +12789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6457069503029014625, guid: 07711af5ec824b9499d91e327e4ab554, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.18
+      value: 30.44
       objectReference: {fileID: 0}
     - target: {fileID: 6457069503029014625, guid: 07711af5ec824b9499d91e327e4ab554, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15469,7 +15469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6457069503029014625, guid: 07711af5ec824b9499d91e327e4ab554, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.31
+      value: 30.4
       objectReference: {fileID: 0}
     - target: {fileID: 6457069503029014625, guid: 07711af5ec824b9499d91e327e4ab554, type: 3}
       propertyPath: m_LocalPosition.y
