@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class DoorManager : MonoBehaviour
 {
-    [SerializeField]
-    private int _doorTimerOpened = 20;
-    [SerializeField]
-    private int _doorTimerClosed = 180;
+    public int _doorTimerOpened = 20;
+    public int _doorTimerClosed = 180;
 
     private Animator _doorAnimator = null;
     // Start is called before the first frame update
