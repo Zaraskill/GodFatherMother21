@@ -20,7 +20,11 @@ public class Cachet : MonoBehaviour
 
     void Update()
     {
-        if (playerStats.hasCachet && playerEntity.GetAxis("ItemTwo") == 1)
+        if (playerStats.hasCachet 
+            && playerEntity.GetAxis("ItemTwo") == 1 
+            && !playerStats.pacemaker.hasPacemakerBuff 
+            && !playerStats.oxygen.hasOxygenBuff
+            )
         {
             Debug.Log("Cachet Used !");
             AudioManager.PlayAudioAsset(AudioManager.ClipsName.CACHET, null);

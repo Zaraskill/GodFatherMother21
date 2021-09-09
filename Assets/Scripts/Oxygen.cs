@@ -1,6 +1,7 @@
 using Rewired;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 // Speeds up the player's character movement speed for a limited period of time. Stoppable
@@ -9,33 +10,67 @@ public class Oxygen : MonoBehaviour
     private PlayerStats playerStats;
     private Pacemaker pacemaker;
     private Player playerEntity;
+    private GameOverConditions gameOverConditions;
     [Header("Oxygen Properties")]
     [SerializeField] private int playerID = 0;
-    [SerializeField] public float oxygenCapacity = 8f;
+    [SerializeField] public float buffTimer = 5f;
+    [SerializeField] public float oxygenCapacity = 99f;
     [SerializeField] public float movementSpeedBoost = 0.3f;
-    [SerializeField] public float oxygenCapacityDecreaseValue = 1f;
+    [SerializeField] public float oxygenCapacityDecreaseValue = 33f;
     [SerializeField] bool refillOxygenCapacity;
     private float initialOxygenCapacity;
-    public bool hasOxygenBuff;
+    private float initialBuffTimer;
+    [HideInInspector] public bool hasOxygenBuff;
     void Start()
     {
+        initialBuffTimer = buffTimer;
         initialOxygenCapacity = oxygenCapacity;
         playerEntity = ReInput.players.GetPlayer(playerID);
         playerStats = GetComponent<PlayerStats>();
         pacemaker = GetComponent<Pacemaker>();
+        gameOverConditions = GetComponent<GameOverConditions>();
     }
 
     void Update()
     {
-        if (playerStats.hasOxygen) Debug.Log("Oxygen Available");
-        if (refillOxygenCapacity) {
-            oxygenCapacity = initialOxygenCapacity;
-            refillOxygenCapacity = false;
+        if (!gameOverConditions.hasLost)
+        {
+            if (playerStats.hasOxygen) Debug.Log("Oxygen Available");
+            if (refillOxygenCapacity)
+            {
+                oxygenCapacity = initialOxygenCapacity;
+                refillOxygenCapacity = false;
+            }
+            if (!hasOxygenBuff && CheckOxygenCapacity() && !pacemaker.hasPacemakerBuff)
+                StartCoroutine(ActivateMovementSpeedBoost());
         }
-        if (!hasOxygenBuff && CheckOxygenCapacity() && !pacemaker.hasPacemakerBuff)
-        StartCoroutine(ActivateMovementSpeedBoost());
+        else
+        {
+            StopAllCoroutines();
+        }
     }
-
+    IEnumerator StartChrono()
+    {
+        yield return new WaitForSeconds(1f);
+        buffTimer--;
+        Debug.Log(buffTimer);
+        if (buffTimer != 0)
+        {
+            playerStats.movementSpeed = Mathf.Clamp(playerStats.movementSpeed + movementSpeedBoost, playerStats.minSpeedValue, playerStats.maxSpeedValue);
+            StartCoroutine(StartChrono());
+        }
+        else
+        {
+            //AudioManager.PlayAudioAsset(AudioManager.ClipsName.OXYGEN_CLOSING, null);
+            if (!CheckOxygenCapacity())
+            {
+                DisableOxygen();
+            }
+            hasOxygenBuff = false;
+            buffTimer = initialBuffTimer;
+            yield break;
+        }
+    }
     IEnumerator ActivateMovementSpeedBoost()
     {
         while (true)
@@ -44,36 +79,21 @@ public class Oxygen : MonoBehaviour
             if (playerStats.hasOxygen)
             {
                 // Si on maintient la touche
-                if (playerEntity.GetAxis("ItemOne") == 1)
+                if (playerEntity.GetAxis("ItemOne") == 1 && !hasOxygenBuff)
                 {
                     if (CheckOxygenCapacity())
                     {
-                        if(!hasOxygenBuff) AudioManager.PlayAudioAsset(AudioManager.ClipsName.OXYGEN_OPENING, null);
+                        StartCoroutine(StartChrono());
                         Debug.Log("Oxygen Used !");
-
-                        oxygenCapacity--;
-                        Debug.Log("Number of Oxygen stacks available: "+oxygenCapacity);
+                        oxygenCapacity -= oxygenCapacityDecreaseValue;
+                        Debug.Log("Oxygen Capacity: " + oxygenCapacity);
                         hasOxygenBuff = true;
-                        playerStats.movementSpeed = Mathf.Clamp(playerStats.movementSpeed + movementSpeedBoost, playerStats.minSpeedValue, playerStats.maxSpeedValue);
                     }
-                    else
-                    {
-                        DisableOxygen();
-                        break;
-                    }
-                }
-                else
-                {
-                    DisableOxygen();
-                    break;
+                    else break;
                 }
             }
-            else
-            {
-                DisableOxygen();
-                break;
-            }
-            yield return new WaitForSeconds(oxygenCapacityDecreaseValue);
+            else break;
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -83,14 +103,12 @@ public class Oxygen : MonoBehaviour
         {
             playerStats.hasOxygen = false;
             Debug.Log("Oxygen Faided !");
-            AudioManager.PlayAudioAsset(AudioManager.ClipsName.OXYGEN_CLOSING, null);
         }
-        AudioManager.StopPlayAudioAsset(AudioManager.ClipsName.OXYGEN_OPENING, null);
         hasOxygenBuff = false;
     }
     bool CheckOxygenCapacity()
     {
-        if (oxygenCapacity == 0)
+        if (oxygenCapacity <= 0)
         {
             return (false);
         }

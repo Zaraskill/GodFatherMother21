@@ -722,9 +722,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 0
-  oxygenCapacity: 8
-  movementSpeedBoost: 0.3
-  oxygenCapacityDecreaseValue: 1
+  buffTimer: 2
+  oxygenCapacity: 99
+  movementSpeedBoost: 0.5
+  oxygenCapacityDecreaseValue: 33
   refillOxygenCapacity: 0
   hasOxygenBuff: 0
 --- !u!114 &408757698
@@ -754,6 +755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasLost: 0
+  playOnce: 0
 --- !u!114 &408757700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -766,6 +768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 741ab25485e3e7e47a96bc5cb98a61f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
   movementSpeed: 2
   secondsBeforeDecrease: 1
   speedDecreaseValue_1: 0.015
@@ -781,6 +784,10 @@ MonoBehaviour:
   value_2: 2
   value_3: 3
   value_4: 4
+  gameOver: {fileID: 0}
+  oxygen: {fileID: 0}
+  pacemaker: {fileID: 0}
+  cachet: {fileID: 0}
 --- !u!114 &408757701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2929,12 +2936,6 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 061bb3ef148fc77439e299ae331253dc, type: 3}
     mixerGroup: {fileID: 0}
     isLooping: 0
-  - idName: level_background
-    description: 
-    enumCode: 18
-    clip: {fileID: 8300000, guid: 2659d1c8c705d9843854a33e5de43117, type: 3}
-    mixerGroup: {fileID: 0}
-    isLooping: 0
   - idName: punch
     description: 
     enumCode: 19
@@ -2961,10 +2962,9 @@ MonoBehaviour:
   - {fileID: 59547632}
   - {fileID: 1252095504}
   - {fileID: 1145770591}
-  - {fileID: 1727191229}
   - {fileID: 1357833823}
   sourceGlobalMusic: {fileID: 1727191229}
-  playMusicAtStart: 0
+  playMusicAtStart: 1
 --- !u!4 &1004732180
 Transform:
   m_ObjectHideFlags: 0
@@ -3185,9 +3185,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0639ee95410e09f40a3315b5480c2067, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.3
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4220,9 +4220,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2659d1c8c705d9843854a33e5de43117, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.006
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4518,7 +4518,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 400f020063e4d944cba331389c48dda6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
