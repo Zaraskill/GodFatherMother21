@@ -12,16 +12,21 @@ public class PlayerController : MonoBehaviour
     public float forwardSpeed = 2f;
     [SerializeField] private int playerID = 0;
     [SerializeField] private Player  playerEntity;
+
+
     private bool canTurn = false;
     private bool isInQTE = false;
     private Rigidbody _rigidbody;
+    private PlayerStats stats;
     private InputQTE goodInput;
     private bool isQTESuccess = false;
+    private OldPerson oldMan;
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         playerEntity = ReInput.players.GetPlayer(playerID);
+        stats = GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame
@@ -29,24 +34,21 @@ public class PlayerController : MonoBehaviour
     {
         if (isInQTE)
         {
-            if(playerEntity.GetAxis("QTEA") < 0 && goodInput == InputQTE.QTEA)
+            Debug.Log("QTE");
+            if(playerEntity.GetButtonDown("QTEA") && goodInput == InputQTE.QTEA)
             {
-                Debug.Log("Bouton A");
                 isQTESuccess = true;
             }
-            else if (playerEntity.GetAxis("QTEB") < 0 && goodInput == InputQTE.QTEB)
+            else if (playerEntity.GetButtonDown("QTEB")  && goodInput == InputQTE.QTEB)
             {
-                Debug.Log("Bouton b");
                 isQTESuccess = true;
             }
-            else if (playerEntity.GetAxis("QTEC") < 0 && goodInput == InputQTE.QTEC)
+            else if (playerEntity.GetButtonDown("QTEC")  && goodInput == InputQTE.QTEC)
             {
-                Debug.Log("Bouton x");
                 isQTESuccess = true;
             }
-            else if (playerEntity.GetAxis("QTED") < 0 && goodInput == InputQTE.QTED)
+            else if (playerEntity.GetButtonDown("QTED") && goodInput == InputQTE.QTED)
             {
-                Debug.Log("Bouton y");
                 isQTESuccess = true;
             }
 
@@ -54,15 +56,35 @@ public class PlayerController : MonoBehaviour
             if (isQTESuccess)
             {
                 isInQTE = false;
+                switch (oldMan.itemDropped) 
+                {
+                    case OldPerson.ItemToDrop.Meds:
+                        if(!stats.hasCachet)
+                            stats.hasCachet = true;
+                        break;
+                    case OldPerson.ItemToDrop.Oxygen:
+                        if (!stats.hasOxygen)
+                            stats.hasOxygen = true;
+                        break;
+                    case OldPerson.ItemToDrop.Pacemaker:
+                        if (!stats.hasPacemaker)
+                            stats.hasPacemaker = true;
+                        break;
+                }
+                oldMan = null;
                 Debug.Log("QTE");
             }
         }
         if (canTurn)
         {
             float rotation = playerEntity.GetAxis("Turn");
+            if (playerEntity.GetButtonDown("LeftTurn"))
+                rotation = -1;
+            if (playerEntity.GetButtonDown("RightTurn"))
+                rotation = 1;
+
             if(-1==rotation  || rotation==1 )
             {
-                Debug.Log("Tourne");
                 gameObject.transform.Rotate(new Vector3(0,90,0)*rotation);
                 canTurn = false;
             }
@@ -75,11 +97,13 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag.Equals("TurnZone"))
         {
+            Debug.Log("turn");
             canTurn = true;
         }
         if (other.tag.Equals("OldPeople"))
         {
             isInQTE = true;
+            oldMan = other.gameObject.GetComponent<OldPerson>();
             StartQTE();
         }
     }
@@ -93,6 +117,7 @@ public class PlayerController : MonoBehaviour
         if (other.tag.Equals("OldPeople"))
         {
             isInQTE = false;
+            oldMan = null;
         }
     }
 
