@@ -34,7 +34,6 @@ public class Pacemaker : MonoBehaviour
     void ActivateMovementSpeedBoost()
     {
         Debug.Log("Pacemaker Used !");
-        playerStats.movementSpeed = Mathf.Clamp(playerStats.movementSpeed + movementSpeedBoost, playerStats.minSpeedValue, playerStats.maxSpeedValue);
         StartCoroutine(StartChrono());
     }
     IEnumerator StartChrono()
@@ -45,6 +44,7 @@ public class Pacemaker : MonoBehaviour
         if (buffTimer != 0)
         {
             buffTimer--;
+            playerStats.movementSpeed = Mathf.Clamp(playerStats.movementSpeed + movementSpeedBoost, playerStats.minSpeedValue, playerStats.maxSpeedValue);
             StartCoroutine(StartChrono());
         }
         else
