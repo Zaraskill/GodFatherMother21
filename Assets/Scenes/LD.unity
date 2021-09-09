@@ -10677,7 +10677,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
-<<<<<<< HEAD
       propertyPath: value_1
       value: 10
       objectReference: {fileID: 0}
@@ -10694,8 +10693,6 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
-=======
->>>>>>> main
       propertyPath: hasCachet
       value: 1
       objectReference: {fileID: 0}
@@ -10708,13 +10705,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
-<<<<<<< HEAD
-      propertyPath: maxSpeedValue
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
-=======
->>>>>>> main
       propertyPath: movementSpeed
       value: 10
       objectReference: {fileID: 0}
