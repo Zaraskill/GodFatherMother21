@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 885536123932499929}
   - component: {fileID: 885536123932499930}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Nurse
   m_TagString: SpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 885536123932499932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -8}
+  m_LocalPosition: {x: 0, y: -1, z: -5.75}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acca40b5f9290be4b826c1d601c6e04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToKillPlayer: 1
   movementSpeedThresholdToPointA: 2
   movementSpeedThresholdToPointB: 5
   movementSpeedThresholdToPointC: 10
@@ -109,7 +110,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 885536123932499932}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 0
   m_Radius: 0.18800099
   m_Height: 1.8278282

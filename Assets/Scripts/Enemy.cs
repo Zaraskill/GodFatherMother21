@@ -9,7 +9,9 @@ public class Enemy : MonoBehaviour
     private GameObject PointA;
     private GameObject PointB;
     private PlayerStats playerStats;
+    private GameOverConditions gameOverConditions;
 
+    public float distanceToKillPlayer = 1f;
     public float movementSpeedThresholdToPointA = 2f;
     public float movementSpeedThresholdToPointB = 5f;
     public float movementSpeedThresholdToPointC = 10f;
@@ -25,14 +27,15 @@ public class Enemy : MonoBehaviour
         PointA = GameObject.FindGameObjectWithTag("PointA");
         PointB = GameObject.FindGameObjectWithTag("PointB");
 
+        gameOverConditions = GetComponentInParent<GameOverConditions>();
         playerStats = GetComponentInParent<PlayerStats>();
-        
         transform.position = PointC.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        StartCoroutine(CheckDistance());
         // Se rapproche très dangereusement du joueur
         if (playerStats.movementSpeed <= movementSpeedThresholdToPointA)
         {
@@ -52,12 +55,26 @@ public class Enemy : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, PointC.transform.position, nurseMovementSpeedToPointC * Time.deltaTime);
         }
     }
-    void OnCollisionEnter(Collision collision)
+    IEnumerator CheckDistance()
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (Vector3.Distance(transform.parent.position, transform.position) < distanceToKillPlayer)
         {
-            Debug.Log("DEAD !");
+            Debug.Log(transform.parent.name + " dead !");
+            gameOverConditions.hasLost = true;
+            yield return new WaitForSeconds(3f);
             SceneManager.LoadScene("LD");
         }
     }
+    /*private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log(other.gameObject.name +" dead !");
+            SceneManager.LoadScene("LD");
+       }
+        else
+        {
+            Debug.Log("ALIVE !");
+        }
+    }*/
 }
