@@ -5,17 +5,26 @@ using UnityEngine.UI;
 
 public class UI_Boosts : MonoBehaviour
 {
-    DoorManager doorManager;
+    public DoorManager doorManager;
     //public PlayerStats playerStats;
     //public Pacemaker pacemaker;
     //public Cachet cachet;
     //public Oxygen oxygene;
     [SerializeField] private Image warningOpeningImage;
     [SerializeField] private Image warningClosingImage;
+
     [SerializeField] private Image iconPacemaker;
     [SerializeField] private Image iconPills;
     [SerializeField] private Image iconOxygen;
+
     [SerializeField] private Image worldPosOxygen;
+    [SerializeField] private Slider worldPosOxygenSlider;
+    [SerializeField] private Gradient worldPosOxygenColorGradient;
+
+    [SerializeField] private GameObject cachetGo;
+    [SerializeField] private Image doorRed;
+    [SerializeField] private Image doorOrange;
+    [SerializeField] private Image doorGreen;
 
     private bool fadeInOpening = false, fadeInClosing = false;
     private bool fadePacemaker = false;
@@ -27,7 +36,7 @@ public class UI_Boosts : MonoBehaviour
 
     void Start()
     {
-
+        WarningOpening();
     }
 
     void Update()
@@ -90,6 +99,15 @@ public class UI_Boosts : MonoBehaviour
             StartCoroutine("Cachet");
             cachetUsed = false;
         }
+
+        /*if(playerStats.hasCachet)
+        {
+            cachetGo.SetActive(true);
+        }
+        else
+        {
+            cachetGo.SetActive(false);
+        }*/
         #endregion
 
         #region Oxygene Update
@@ -103,6 +121,10 @@ public class UI_Boosts : MonoBehaviour
             timerOxygene = 0;
             iconOxygen.color = new Color(iconOxygen.color.r, iconOxygen.color.g, iconOxygen.color.b, 1);
         }*/
+        #endregion
+
+        #region WorldPosOxygen
+        SetupOxygenValue();
         #endregion
     }
 
@@ -119,20 +141,31 @@ public class UI_Boosts : MonoBehaviour
 
     IEnumerator WarningOpeningDoor()
     {
-        yield return new WaitForSeconds(doorManager._doorTimerClosed);
+        yield return new WaitForSeconds(doorManager._doorTimerClosed - 4.5f);
         fadeInOpening = true;
         yield return new WaitForSeconds(4.5f);
         fadeInOpening = false;
         warningOpeningImage.enabled = false;
+        WarningClosing();
     }
 
     IEnumerator WarningClosingDoor()
     {
-        yield return new WaitForSeconds(doorManager._doorTimerClosed);
+        doorGreen.enabled = true;
+        yield return new WaitForSeconds(doorManager._doorTimerOpened / 3);
+        doorGreen.enabled = false;
+        doorOrange.enabled = true;
+        yield return new WaitForSeconds(doorManager._doorTimerOpened / 3);
+        
+        doorOrange.enabled = false;
+        doorRed.enabled = true;
+        yield return new WaitForSeconds((doorManager._doorTimerOpened / 3) -4.5f);
         fadeInClosing = true;
         yield return new WaitForSeconds(4.5f);
         fadeInClosing = false;
+        doorRed.enabled = false;
         warningClosingImage.enabled = false;
+        WarningOpening();
     }
     #endregion
 
@@ -159,6 +192,16 @@ public class UI_Boosts : MonoBehaviour
         iconPills.enabled = true;
         yield return new WaitForSeconds(3.0f);
         iconPills.enabled = false;
+    }
+    #endregion
+
+    #region WorldPosOxygen
+    public void SetupOxygenValue()
+    {/*
+        int oxygenValue;
+        oxygenValue = (int)oxygene.oxygenCapacity;
+        worldPosOxygenSlider.value = oxygenValue;
+        worldPosOxygen.color = worldPosOxygenColorGradient.Evaluate(worldPosOxygenSlider.normalizedValue);*/
     }
     #endregion
 }
