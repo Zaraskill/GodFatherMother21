@@ -893,6 +893,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: hasOxygen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5395579063708254967, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: m_Name
       value: Player
@@ -903,7 +907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5395579063708254973, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.16
+      value: 4.59
       objectReference: {fileID: 0}
     - target: {fileID: 5395579063708254973, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: m_LocalPosition.y
@@ -911,7 +915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5395579063708254973, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5.03
       objectReference: {fileID: 0}
     - target: {fileID: 5395579063708254973, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: m_LocalRotation.w

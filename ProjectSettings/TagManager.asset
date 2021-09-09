@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TurnZone
   - OldPeople
+  - Nurse
   layers:
   - Default
   - TransparentFX
