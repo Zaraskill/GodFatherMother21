@@ -84,23 +84,40 @@ public class PlayerController : MonoBehaviour
 
             if(-1==rotation  || rotation==1 )
             {
-                gameObject.transform.Rotate(new Vector3(0,90,0)*rotation);
+                //gameObject.transform.Rotate(new Vector3(0,90,0)*rotation);
+                StartCoroutine(AnimRotation(transform.eulerAngles, new Vector3(0, 90 * rotation, 0)));
                 Debug.Log(turnZone);
-                gameObject.transform.position = turnZone.transform.position;
                 canTurn = false;
-                turnZone = null;
             }
         }
 
         _rigidbody.velocity = gameObject.transform.forward * forwardSpeed;
     }
 
+    private IEnumerator AnimRotation(Vector3 rotInit, Vector3 rotOffSet)
+    {
+        float time = 0f;
+        Vector3 rotFinal = rotInit + rotOffSet;
+        while (time < 1) {
+            gameObject.transform.eulerAngles = Vector3.Slerp(rotInit, rotFinal, time);
+            time += Time.deltaTime * forwardSpeed;
+            yield return null;
+        }
+        gameObject.transform.eulerAngles = rotFinal;
+        //gameObject.transform.position = turnZone.transform.position;
+        turnZone = null;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("TurnZone"))
         {
             canTurn = true;
             turnZone = other.gameObject;
+            if (turnZone.transform.childCount > 0)
+            {
+                turnZone.transform.GetChild(0).gameObject.SetActive(true);
+                Debug.Log("easyzarzar");
+            }
         }
         if (other.tag.Equals("OldPeople"))
         {
