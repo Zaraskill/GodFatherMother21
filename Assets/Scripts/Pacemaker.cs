@@ -9,20 +9,14 @@ public class Pacemaker : MonoBehaviour
     private PlayerStats playerStats;
     private Oxygen oxygen;
     [Header("Pacemaker Properties")]
-    [SerializeField] private int playerID = 0;
     [SerializeField] public float buffTimer = 5f;
-    [SerializeField] public float movementSpeedBoost = 2f;
-    private Player playerEntity;
-    private float initialPlayerMovementSpeed;
+    [SerializeField] public float movementSpeedBoost = 0.3f;
     private float resetTimer = 5f;
-    public bool hasPacemakerBuff;
+    [HideInInspector] public bool hasPacemakerBuff;
     void Start()
     {
-        playerEntity = ReInput.players.GetPlayer(playerID);
         playerStats = GetComponent<PlayerStats>();
         oxygen = GetComponent<Oxygen>();
-
-        initialPlayerMovementSpeed = playerStats.movementSpeed;
     }
 
     void Update()
@@ -40,12 +34,8 @@ public class Pacemaker : MonoBehaviour
     void ActivateMovementSpeedBoost()
     {
         Debug.Log("Pacemaker Used !");
-        playerStats.movementSpeed = Mathf.Clamp(playerStats.movementSpeed * movementSpeedBoost, playerStats.minSpeedValue, playerStats.maxSpeedValue);
+        playerStats.movementSpeed = Mathf.Clamp(playerStats.movementSpeed + movementSpeedBoost, playerStats.minSpeedValue, playerStats.maxSpeedValue);
         StartCoroutine(StartChrono());
-    }
-    void DeactivateMovementSpeedBoost()
-    {
-        playerStats.movementSpeed = initialPlayerMovementSpeed;
     }
     IEnumerator StartChrono()
     {
@@ -60,8 +50,7 @@ public class Pacemaker : MonoBehaviour
         else
         {
             // Ramener la vitesse du joueur à la normale lorsque le chrono arrive à 0
-            Debug.Log("Pacemaker : Movement Speed Bonus Faiding");
-            DeactivateMovementSpeedBoost();
+            Debug.Log("Pacemaker Faided !");
             playerStats.hasPacemaker = false;
             hasPacemakerBuff = false;
             buffTimer = resetTimer;

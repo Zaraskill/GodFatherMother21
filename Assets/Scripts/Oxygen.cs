@@ -8,66 +8,92 @@ public class Oxygen : MonoBehaviour
 {
     private PlayerStats playerStats;
     private Pacemaker pacemaker;
+    private Player playerEntity;
     [Header("Oxygen Properties")]
     [SerializeField] private int playerID = 0;
-    [SerializeField] public float oxygenCapacity = 15f;
-    [SerializeField] public float movementSpeedBoost = 15f;
-    private Player playerEntity;
-    private float initialPlayerMovementSpeed;
+    [SerializeField] public float oxygenCapacity = 8f;
+    [SerializeField] public float movementSpeedBoost = 0.3f;
+    [SerializeField] public float oxygenCapacityDecreaseValue = 1f;
+    [SerializeField] bool refillOxygenCapacity;
+    private float initialOxygenCapacity;
     public bool hasOxygenBuff;
     void Start()
     {
+        initialOxygenCapacity = oxygenCapacity;
         playerEntity = ReInput.players.GetPlayer(playerID);
         playerStats = GetComponent<PlayerStats>();
         pacemaker = GetComponent<Pacemaker>();
-
-        initialPlayerMovementSpeed = playerStats.movementSpeed;
     }
 
     void Update()
     {
         if (playerStats.hasOxygen) Debug.Log("Oxygen Available");
-        // Si le joueur obtient de l'oxygène et n'est pas buff
-        if (playerStats.hasOxygen && !pacemaker.hasPacemakerBuff)
-        {
-            ActivateMovementSpeedBoost();
+        if (refillOxygenCapacity) {
+            oxygenCapacity = initialOxygenCapacity;
+            refillOxygenCapacity = false;
         }
+        if (!hasOxygenBuff && CheckOxygenCapacity() && !pacemaker.hasPacemakerBuff)
+        StartCoroutine(ActivateMovementSpeedBoost());
     }
 
-    void ActivateMovementSpeedBoost()
+    IEnumerator ActivateMovementSpeedBoost()
     {
-        // Si on maintient la touche
-        if (playerEntity.GetAxis("ItemOne") == 1)
+        while (true)
         {
-            hasOxygenBuff = true;
-            oxygenCapacity--;
-            Debug.Log(oxygenCapacity);
-
-            if (!CheckOxygenCapacity()) return;
-
-            playerStats.movementSpeed = Mathf.Clamp(playerStats.movementSpeed + movementSpeedBoost, playerStats.minSpeedValue, playerStats.maxSpeedValue);
-        }
-        else
-        {
-            hasOxygenBuff = false;
-            if (playerStats.movementSpeed > initialPlayerMovementSpeed)
+            // Si le joueur obtient de l'oxygène et n'est pas buff
+            if (playerStats.hasOxygen)
             {
-                DeactivateMovementSpeedBoost();
+                // Si on maintient la touche
+                if (playerEntity.GetAxis("ItemOne") == 1)
+                {
+                    if (CheckOxygenCapacity())
+                    {
+                        if(!hasOxygenBuff) AudioManager.PlayAudioAsset(AudioManager.ClipsName.OXYGEN_OPENING, null);
+                        Debug.Log("Oxygen Used !");
+
+                        oxygenCapacity--;
+                        Debug.Log("Number of Oxygen stacks available: "+oxygenCapacity);
+                        hasOxygenBuff = true;
+                        playerStats.movementSpeed = Mathf.Clamp(playerStats.movementSpeed + movementSpeedBoost, playerStats.minSpeedValue, playerStats.maxSpeedValue);
+                    }
+                    else
+                    {
+                        DisableOxygen();
+                        break;
+                    }
+                }
+                else
+                {
+                    DisableOxygen();
+                    break;
+                }
             }
+            else
+            {
+                DisableOxygen();
+                break;
+            }
+            yield return new WaitForSeconds(oxygenCapacityDecreaseValue);
         }
     }
-    void DeactivateMovementSpeedBoost()
-    {
-        playerStats.movementSpeed = initialPlayerMovementSpeed;
-    }
 
+    void DisableOxygen()
+    {
+        if (!CheckOxygenCapacity())
+        {
+            playerStats.hasOxygen = false;
+            Debug.Log("Oxygen Faided !");
+            AudioManager.PlayAudioAsset(AudioManager.ClipsName.OXYGEN_CLOSING, null);
+        }
+        AudioManager.StopPlayAudioAsset(AudioManager.ClipsName.OXYGEN_OPENING, null);
+        hasOxygenBuff = false;
+    }
     bool CheckOxygenCapacity()
     {
         if (oxygenCapacity == 0)
         {
-            hasOxygenBuff = false;
-            Debug.Log("Oxygen Unavailable");
+            return (false);
         }
-        return (hasOxygenBuff);
+        return (true);
     }
 }

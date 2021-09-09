@@ -10,7 +10,8 @@ public class Cachet : MonoBehaviour
     private Player playerEntity;
     [Header("Cachet Properties")]
     [SerializeField] private int playerID = 0;
-    [SerializeField] public float movementSpeedBoost = 10f;
+    [SerializeField] public float movementSpeedBoost = 0.5f;
+
     void Start()
     {
         playerEntity = ReInput.players.GetPlayer(playerID);
@@ -21,12 +22,14 @@ public class Cachet : MonoBehaviour
     {
         if (playerStats.hasCachet && playerEntity.GetAxis("ItemTwo") == 1)
         {
+            Debug.Log("Cachet Used !");
             AudioManager.PlayAudioAsset(AudioManager.ClipsName.CACHET, null);
             IncreasePlayerMovementSpeed();
         }
     }
     void IncreasePlayerMovementSpeed()
     {
+        Debug.Log("Cachet Faided !");
         playerStats.movementSpeed = Mathf.Clamp(playerStats.movementSpeed + movementSpeedBoost, playerStats.minSpeedValue, playerStats.maxSpeedValue);
         playerStats.hasCachet = false;
     }
