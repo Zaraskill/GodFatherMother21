@@ -66,7 +66,11 @@ public class PlayerController : MonoBehaviour
                         break;
                     case OldPerson.ItemToDrop.Oxygen:
                         if (!stats.hasOxygen)
+                        {
+                            stats.oxygen.oxygenCapacity = 99f;
                             stats.hasOxygen = true;
+                        }                           
+                        
                         break;
                     case OldPerson.ItemToDrop.Pacemaker:
                         if (!stats.hasPacemaker)
