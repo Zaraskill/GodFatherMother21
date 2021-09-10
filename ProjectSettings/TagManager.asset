@@ -11,6 +11,7 @@ TagManager:
   - PointA
   - PointB
   - PointC
+  - Wall
   layers:
   - Default
   - TransparentFX
