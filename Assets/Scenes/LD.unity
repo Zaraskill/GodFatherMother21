@@ -14548,6 +14548,10 @@ PrefabInstance:
       propertyPath: speedDecreaseValue_4
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2489045490748625659, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: movementSpeedToEnableLaugh
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 3210061898558140230, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: buffTimer
       value: 2
