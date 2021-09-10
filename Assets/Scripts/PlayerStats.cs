@@ -32,11 +32,15 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public float fieldOfViewC = 75f;
     [SerializeField] public float fieldOfViewMax = 100f;
     [SerializeField] public float fieldOfViewTransitionSpeed = 0.5f;
+    [SerializeField] public float LaughTimer = 20f;
+    [SerializeField] public float movementSpeedToEnableLaugh = 13f;
+    private float initialLaughTimer = 15f;
     void Start()
     {
         // Le joueur démarre avec un cachet
         hasCachet = true;
         isRunning = false;
+        initialLaughTimer = LaughTimer;
 
         camera = GetComponentInChildren<Camera>();
         playerController = GetComponent<PlayerController>();
@@ -46,6 +50,7 @@ public class PlayerStats : MonoBehaviour
         cachet = GetComponent<Cachet>();
 
         StartCoroutine(DecreaseSpeedOvertime());
+        StartCoroutine(CrazyLaughAudio());
 
         Debug.Log(camera.fieldOfView);
     }
@@ -54,25 +59,25 @@ public class PlayerStats : MonoBehaviour
     {
         playerController.forwardSpeed = movementSpeed;
         //StartCoroutine(PlayerAudio());
-         if (playerController.forwardSpeed < value_1)
+        if (playerController.forwardSpeed < value_1)
         {
             camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, fieldOfViewMin, fieldOfViewTransitionSpeed * Time.deltaTime);
-            Debug.Log(camera.fieldOfView);
+            //Debug.Log(camera.fieldOfView);
         }
         else if (playerController.forwardSpeed >= value_1 && playerController.forwardSpeed <= value_2)
         {
             camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, fieldOfViewB, fieldOfViewTransitionSpeed * Time.deltaTime);
-            Debug.Log(camera.fieldOfView);
+            //Debug.Log(camera.fieldOfView);
         }
         else if (playerController.forwardSpeed >= value_2 && playerController.forwardSpeed <= value_3)
         {
             camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, fieldOfViewC, fieldOfViewTransitionSpeed * Time.deltaTime);
-            Debug.Log(camera.fieldOfView);
+            //Debug.Log(camera.fieldOfView);
         }
         else if (playerController.forwardSpeed >= value_3 && playerController.forwardSpeed <= value_4)
         {
             camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, fieldOfViewMax, fieldOfViewTransitionSpeed * Time.deltaTime);
-            Debug.Log(camera.fieldOfView);
+            //Debug.Log(camera.fieldOfView);
         }
     }
     IEnumerator DecreaseSpeedOvertime()
@@ -125,6 +130,27 @@ public class PlayerStats : MonoBehaviour
                 AudioManager.PlayAudioAsset(AudioManager.ClipsName.WHEELCHAIR_WALK, null);
             }
             StartCoroutine(PlayerAudio());
+        }
+    }
+    IEnumerator CrazyLaughAudio()
+    {
+        yield return new WaitForSeconds(1f);
+        Debug.Log(LaughTimer);
+        if (LaughTimer != 0)
+        {
+            LaughTimer--;
+            StartCoroutine(CrazyLaughAudio());
+        }
+        else if (LaughTimer == 0 && movementSpeed >= movementSpeedToEnableLaugh)
+        {
+            LaughTimer = initialLaughTimer;
+            AudioManager.PlayAudioAsset(AudioManager.ClipsName.CRAZY_LAUGH, null);
+            StartCoroutine(CrazyLaughAudio());
+        }
+        else if (LaughTimer == 0 && movementSpeed < movementSpeedToEnableLaugh)
+        {
+            LaughTimer = initialLaughTimer;
+            StartCoroutine(CrazyLaughAudio());
         }
     }
 }
