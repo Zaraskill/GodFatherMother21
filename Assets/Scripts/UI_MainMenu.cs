@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor.Events;
+
 public class UI_MainMenu : MonoBehaviour
 {
     [SerializeField] private Animator buttonsAnimator;
@@ -35,6 +37,7 @@ public class UI_MainMenu : MonoBehaviour
 
     public void PlayButton()
     {
+        GameObject.Find("Menu Audio").GetComponent<AudioSource>().Stop();
         SceneManager.LoadScene("LD");
     }
 
