@@ -143,7 +143,9 @@ public class PlayerController : MonoBehaviour
         if (other.tag.Equals("OldPeople"))
         {
             isInQTE = false;
+            oldMan.UnsetImage();
             oldMan = null;
+            
         }
     }
 
@@ -152,5 +154,6 @@ public class PlayerController : MonoBehaviour
         int random = Random.Range(0, 4);
         goodInput = (InputQTE) random;
         Debug.Log(goodInput);
+        oldMan.SetImage(random);
     }
 }
