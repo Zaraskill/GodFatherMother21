@@ -4149,7 +4149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3824953106669725709, guid: c657c375d472e6f40b06bfc9dfa2317e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -0.9
       objectReference: {fileID: 0}
     - target: {fileID: 3824953106669725709, guid: c657c375d472e6f40b06bfc9dfa2317e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10557,7 +10557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5129238869687811499, guid: 3043005dd2db7bf4a8ef78ba6d1d00ba, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.5
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 5129238869687811499, guid: 3043005dd2db7bf4a8ef78ba6d1d00ba, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13231,7 +13231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3210061898558140230, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: movementSpeedBoost
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4316490536584900430, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: m_IsActive
@@ -13334,6 +13334,10 @@ PrefabInstance:
       value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 5662422573725051284, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: distanceToKillPlayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662422573725051284, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: nurseMovementSpeedToPointA
       value: 1.5
       objectReference: {fileID: 0}
@@ -13359,7 +13363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5879646007946894374, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: movementSpeedBoost
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6826743549504319680, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: m_RootOrder
