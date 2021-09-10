@@ -3239,6 +3239,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6457069503029014625, guid: 07711af5ec824b9499d91e327e4ab554, type: 3}
   m_PrefabInstance: {fileID: 463114365}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &465897032 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3928528158991960498, guid: a122e5a8627ef1f4f97f03958b07d487, type: 3}
+  m_PrefabInstance: {fileID: 573557947}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &475622936 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7482583922800250002, guid: 15a5718d4d1c288459a0d8c18ab27b02, type: 3}
@@ -4317,6 +4328,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1968071816}
     - target: {fileID: 3928528157854741413, guid: a122e5a8627ef1f4f97f03958b07d487, type: 3}
+      propertyPath: doorRed
+      value: 
+      objectReference: {fileID: 2100000, guid: 7aea63420f5e2b64bb8d32837631f8cb, type: 2}
+    - target: {fileID: 3928528157854741413, guid: a122e5a8627ef1f4f97f03958b07d487, type: 3}
       propertyPath: oxygene
       value: 
       objectReference: {fileID: 1968071815}
@@ -4325,9 +4340,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 475622936}
     - target: {fileID: 3928528157854741413, guid: a122e5a8627ef1f4f97f03958b07d487, type: 3}
+      propertyPath: doorGreen
+      value: 
+      objectReference: {fileID: 2100000, guid: f2cd220765f85bb44b7c474f47e111d8, type: 2}
+    - target: {fileID: 3928528157854741413, guid: a122e5a8627ef1f4f97f03958b07d487, type: 3}
+      propertyPath: doorImage
+      value: 
+      objectReference: {fileID: 465897032}
+    - target: {fileID: 3928528157854741413, guid: a122e5a8627ef1f4f97f03958b07d487, type: 3}
       propertyPath: pacemaker
       value: 
       objectReference: {fileID: 1968071817}
+    - target: {fileID: 3928528157854741413, guid: a122e5a8627ef1f4f97f03958b07d487, type: 3}
+      propertyPath: doorOrange
+      value: 
+      objectReference: {fileID: 2100000, guid: 5bf01d0682398bd489a94ad4f5d41894, type: 2}
     - target: {fileID: 3928528157854741413, guid: a122e5a8627ef1f4f97f03958b07d487, type: 3}
       propertyPath: doorManager
       value: 
@@ -4344,6 +4371,18 @@ PrefabInstance:
       propertyPath: worldPosOxygenSlider
       value: 
       objectReference: {fileID: 971944467}
+    - target: {fileID: 3928528158991960498, guid: a122e5a8627ef1f4f97f03958b07d487, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3928528158991960498, guid: a122e5a8627ef1f4f97f03958b07d487, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3928528158991960498, guid: a122e5a8627ef1f4f97f03958b07d487, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a122e5a8627ef1f4f97f03958b07d487, type: 3}
 --- !u!1 &576919108

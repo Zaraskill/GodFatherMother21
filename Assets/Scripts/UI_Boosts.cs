@@ -22,9 +22,10 @@ public class UI_Boosts : MonoBehaviour
     [SerializeField] private Gradient worldPosOxygenColorGradient;
 
     [SerializeField] private GameObject cachetGo;
-    [SerializeField] private Image doorRed;
-    [SerializeField] private Image doorOrange;
-    [SerializeField] private Image doorGreen;
+    [SerializeField] private Image doorImage;
+    [SerializeField] private Material doorRed;
+    [SerializeField] private Material doorOrange;
+    [SerializeField] private Material doorGreen;
 
     private bool fadeInOpening = false, fadeInClosing = false;
     private bool fadePacemaker = false;
@@ -152,21 +153,23 @@ public class UI_Boosts : MonoBehaviour
 
     IEnumerator WarningClosingDoor()
     {
-        doorGreen.enabled = true;
+        doorImage.enabled = true;
+        doorImage.material = doorGreen;
         yield return new WaitForSeconds(doorManager._doorTimerOpened / 3);
-        doorGreen.enabled = false;
-        doorOrange.enabled = true;
+        doorImage.material = doorGreen;
+        doorImage.material = doorOrange;
         yield return new WaitForSeconds(doorManager._doorTimerOpened / 3);
-        
-        doorOrange.enabled = false;
-        doorRed.enabled = true;
-        yield return new WaitForSeconds((doorManager._doorTimerOpened / 3) -4.5f);
+
+        doorImage.material = doorOrange;
+        doorImage.material = doorRed;
+        yield return new WaitForSeconds((doorManager._doorTimerOpened / 3) - 4.5f);
         fadeInClosing = true;
         yield return new WaitForSeconds(4.5f);
         fadeInClosing = false;
-        doorRed.enabled = false;
+        doorImage.material = doorRed;
         warningClosingImage.enabled = false;
         WarningOpening();
+        doorImage.enabled = false;
     }
     #endregion
 
