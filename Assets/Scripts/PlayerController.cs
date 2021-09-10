@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private bool isQTESuccess = false;
     private OldPerson oldMan;
     private GameObject turnZone;
+    private bool hasEnd;
     // Start is called before the first frame update
     void Start()
     {
@@ -127,7 +129,7 @@ public class PlayerController : MonoBehaviour
         }
         if (other.tag.Equals("Ending"))
         {
-            Time.timeScale = 0;
+            SceneManager.LoadScene("Menu");
         }
     }
 
