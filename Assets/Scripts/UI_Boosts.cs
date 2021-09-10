@@ -23,9 +23,9 @@ public class UI_Boosts : MonoBehaviour
 
     [SerializeField] private GameObject cachetGo;
     [SerializeField] private Image doorImage;
-    [SerializeField] private Material doorRed;
-    [SerializeField] private Material doorOrange;
-    [SerializeField] private Material doorGreen;
+    [SerializeField] private Color32 doorRed;
+    [SerializeField] private Color32 doorOrange;
+    [SerializeField] private Color32 doorGreen;
 
     private bool fadeInOpening = false, fadeInClosing = false;
     private bool fadePacemaker = false;
@@ -154,19 +154,16 @@ public class UI_Boosts : MonoBehaviour
     IEnumerator WarningClosingDoor()
     {
         doorImage.enabled = true;
-        doorImage.material = doorGreen;
+        doorImage.color = new Color32(77,255,51,255);
         yield return new WaitForSeconds(doorManager._doorTimerOpened / 3);
-        doorImage.material = doorGreen;
-        doorImage.material = doorOrange;
+        doorImage.color = new Color32(255, 202, 51, 255);
         yield return new WaitForSeconds(doorManager._doorTimerOpened / 3);
 
-        doorImage.material = doorOrange;
-        doorImage.material = doorRed;
+        doorImage.color = new Color32(255, 51, 51, 255);
         yield return new WaitForSeconds((doorManager._doorTimerOpened / 3) - 4.5f);
         fadeInClosing = true;
         yield return new WaitForSeconds(4.5f);
         fadeInClosing = false;
-        doorImage.material = doorRed;
         warningClosingImage.enabled = false;
         WarningOpening();
         doorImage.enabled = false;
