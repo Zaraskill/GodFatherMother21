@@ -7,6 +7,7 @@ public class GameOverConditions : MonoBehaviour
     private PlayerStats playerStats;
     public bool hasLost;
     public bool playOnce;
+
     void Start()
     {
         playerStats = GetComponent<PlayerStats>();
@@ -17,6 +18,7 @@ public class GameOverConditions : MonoBehaviour
     {
         if (hasLost && !playOnce)
         {
+            Debug.Log("Lost !");
             playerStats.movementSpeed = 0f;
             playOnce = true;
             AudioManager.StopMusic();
@@ -27,6 +29,14 @@ public class GameOverConditions : MonoBehaviour
     public void CheckPlayerMovementSpeed()
     {
         if (playerStats.movementSpeed == 0)
+        {
+            hasLost = true;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Wall") || other.CompareTag("Nurse"))
         {
             hasLost = true;
         }
