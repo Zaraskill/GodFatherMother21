@@ -6658,6 +6658,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4106433345940998135, guid: b115d72607254b248a31b5fa72b4bac2, type: 3}
   m_PrefabInstance: {fileID: 825973616}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &829911973 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+  m_PrefabInstance: {fileID: 1554766355}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &829911975
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829911973}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &829911976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829911973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acca40b5f9290be4b826c1d601c6e04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToKillPlayer: 1
+  movementSpeedThresholdToPointA: 2
+  movementSpeedThresholdToPointB: 5
+  movementSpeedThresholdToPointC: 10
+  nurseMovementSpeedToPointA: 5
+  nurseMovementSpeedToPointB: 5
+  nurseMovementSpeedToPointC: 5
+--- !u!95 &829911977
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829911973}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f0df86298733cc42bcb833ffacceffd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &841207493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13266,6 +13323,79 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 017faf85e5e56a24ab35aea9d31560c5, type: 3}
+--- !u!1001 &1554766355
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1968071814}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.85
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_Name
+      value: Nurse_Run
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892395200810080698, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 191d9ce8cdd4a304ba2e34968ca5b118, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 12755274a3377f841ae03469cc8f13be, type: 3}
 --- !u!1001 &1583859636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15750,6 +15880,10 @@ PrefabInstance:
     - target: {fileID: 5662422573725051280, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: m_LocalPosition.z
       value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662422573725051281, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5662422573725051284, guid: bb7b5464f2edf7c40bb62152c336c899, type: 3}
       propertyPath: distanceToKillPlayer
