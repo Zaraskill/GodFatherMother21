@@ -7,6 +7,10 @@ TagManager:
   - TurnZone
   - OldPeople
   - Nurse
+  - SpawnPoint
+  - PointA
+  - PointB
+  - PointC
   layers:
   - Default
   - TransparentFX
