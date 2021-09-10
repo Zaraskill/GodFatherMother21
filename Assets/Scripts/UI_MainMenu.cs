@@ -21,7 +21,19 @@ public class UI_MainMenu : MonoBehaviour
     [SerializeField] private GameObject goCredits;
     [SerializeField] private GameObject goControls;
 
-   // [SerializeField] private Image blackScreen;
+    [SerializeField] private Sprite playSprite;
+    [SerializeField] private Sprite playSpriteHover;
+
+    [SerializeField] private Sprite creditSprite;
+    [SerializeField] private Sprite creditSpriteHover;
+
+    [SerializeField] private Sprite controlsSprite;
+    [SerializeField] private Sprite controlsSpriteHover;
+
+    [SerializeField] private Sprite quitSprite;
+    [SerializeField] private Sprite quitSpriteHover;
+
+    // [SerializeField] private Image blackScreen;
     private float blackScreenTimer = 0.0f;
 
     [SerializeField] private bool isCredit = false, isControl = false;
@@ -163,11 +175,52 @@ public class UI_MainMenu : MonoBehaviour
         goCredits.SetActive(false);
     }
 
-   /* IEnumerator BlackScreen()
+    /* IEnumerator BlackScreen()
+     {
+         yield return new WaitForSeconds(10.5f);
+         blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, blackScreen.color.a + 1);
+         Debug.Log(blackScreen.color.a);
+         StartCoroutine("BlackScreen");
+     }*/
+
+
+    public void HoverFonctionPlay()
     {
-        yield return new WaitForSeconds(10.5f);
-        blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, blackScreen.color.a + 1);
-        Debug.Log(blackScreen.color.a);
-        StartCoroutine("BlackScreen");
-    }*/
+        playButton.image.sprite = playSpriteHover;
+    }
+
+    public void FonctionPlay()
+    {
+        playButton.image.sprite = playSprite;
+    }
+
+    public void HoverFonctionCredit()
+    {
+        creditsButton.image.sprite = creditSpriteHover;
+    }
+
+    public void FonctionCredit()
+    {
+        creditsButton.image.sprite = creditSprite;
+    }
+
+    public void HoverFonctionControls()
+    {
+        controlsButton.image.sprite = controlsSpriteHover;
+    }
+
+    public void FonctionControls()
+    {
+        controlsButton.image.sprite = controlsSprite;
+    }
+
+    public void HoverFonctionQuit()
+    {
+        quitButton.image.sprite = quitSpriteHover;
+    }
+
+    public void FonctionQuit()
+    {
+        quitButton.image.sprite = quitSprite;
+    }
 }

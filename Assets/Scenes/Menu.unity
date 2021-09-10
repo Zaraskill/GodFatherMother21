@@ -837,6 +837,14 @@ MonoBehaviour:
   quitButton: {fileID: 0}
   goCredits: {fileID: 0}
   goControls: {fileID: 0}
+  playSprite: {fileID: 0}
+  playSpriteHover: {fileID: 0}
+  creditSprite: {fileID: 0}
+  creditSpriteHover: {fileID: 0}
+  controlsSprite: {fileID: 0}
+  controlsSpriteHover: {fileID: 0}
+  quitSprite: {fileID: 0}
+  quitSpriteHover: {fileID: 0}
   isCredit: 0
   isControl: 0
 --- !u!114 &80911854
@@ -16662,8 +16670,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 25171689d68ebdb4798e1422a7a5d2eb, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -16719,7 +16727,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CONTROLS
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -16872,7 +16880,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CREDITS
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17032,6 +17040,14 @@ MonoBehaviour:
   quitButton: {fileID: 2522084513059441717}
   goCredits: {fileID: 1664282707}
   goControls: {fileID: 1553799941}
+  playSprite: {fileID: 21300000, guid: a987440452a4e3b49a4c94608aeedcf4, type: 3}
+  playSpriteHover: {fileID: 21300000, guid: 5e5f27b6aec28884c8a6dc0969f168ea, type: 3}
+  creditSprite: {fileID: 0}
+  creditSpriteHover: {fileID: 0}
+  controlsSprite: {fileID: 0}
+  controlsSpriteHover: {fileID: 0}
+  quitSprite: {fileID: 0}
+  quitSpriteHover: {fileID: 0}
   isCredit: 0
   isControl: 0
 --- !u!1 &2522084513434812145
@@ -17189,7 +17205,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PLAY
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17391,8 +17407,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a987440452a4e3b49a4c94608aeedcf4, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -17421,6 +17437,7 @@ GameObject:
   - component: {fileID: 2522084514521031526}
   - component: {fileID: 2522084514521031525}
   - component: {fileID: 2522084514521031524}
+  - component: {fileID: 2522084514521031532}
   m_Layer: 5
   m_Name: Play_button
   m_TagString: Untagged
@@ -17448,6 +17465,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 463}
   m_SizeDelta: {x: 359.5138, y: 104.02228}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2522084514521031532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2522084514521031530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2522084513434812142}
+          m_TargetAssemblyTypeName: UI_MainMenu, Assembly-CSharp
+          m_MethodName: HoverFonctionPlay
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2522084513434812142}
+          m_TargetAssemblyTypeName: UI_MainMenu, Assembly-CSharp
+          m_MethodName: FonctionPlay
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &2522084514674786276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17536,8 +17598,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 718535de8bdf62f4f8270cbc9725c2e1, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -17681,8 +17743,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 55bb38e3e0875c549b44896c507fe931, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -17711,6 +17773,7 @@ GameObject:
   - component: {fileID: 2522084514765833210}
   - component: {fileID: 2522084514765833209}
   - component: {fileID: 2522084514765833208}
+  - component: {fileID: 2522084514765833216}
   m_Layer: 5
   m_Name: Credits_button
   m_TagString: Untagged
@@ -17738,6 +17801,51 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000061035, y: 315}
   m_SizeDelta: {x: 359.5138, y: 104.02228}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2522084514765833216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2522084514765833214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2522084513434812142}
+          m_TargetAssemblyTypeName: UI_MainMenu, Assembly-CSharp
+          m_MethodName: HoverFonctionPlay
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2522084513434812142}
+          m_TargetAssemblyTypeName: UI_MainMenu, Assembly-CSharp
+          m_MethodName: FonctionPlay
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!222 &2522084514898715296
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17855,7 +17963,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: QUIT
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
