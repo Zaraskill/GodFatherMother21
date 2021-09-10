@@ -12,6 +12,7 @@ TagManager:
   - PointB
   - PointC
   - Wall
+  - VictoryArea
   layers:
   - Default
   - TransparentFX

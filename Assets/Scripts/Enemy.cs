@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log(transform.parent.name + " dead !");
             gameOverConditions.hasLost = true;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(8f);
             AudioManager.PlayMusic();
             SceneManager.LoadScene("LD");
         }

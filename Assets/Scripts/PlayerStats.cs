@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -152,5 +153,20 @@ public class PlayerStats : MonoBehaviour
             LaughTimer = initialLaughTimer;
             StartCoroutine(CrazyLaughAudio());
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("VictoryArea"))
+        {
+            AudioManager.PlayAudioAsset(AudioManager.ClipsName.VICTORY, null);
+            StartCoroutine(OpenMenu());
+        }
+    }
+    IEnumerator OpenMenu()
+    {
+        yield return new WaitForSeconds(2f);
+        AudioManager.StopMusic();
+        SceneManager.LoadScene("Menu");
     }
 }
