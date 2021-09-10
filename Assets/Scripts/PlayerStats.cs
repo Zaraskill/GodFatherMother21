@@ -26,13 +26,19 @@ public class PlayerStats : MonoBehaviour
     [HideInInspector] public Oxygen oxygen;
     [HideInInspector] public Pacemaker pacemaker;
     [HideInInspector] public Cachet cachet;
-   
+    private Camera camera;
+    [SerializeField] public float fieldOfViewMin = 60f;
+    [SerializeField] public float fieldOfViewB = 65f;
+    [SerializeField] public float fieldOfViewC = 75f;
+    [SerializeField] public float fieldOfViewMax = 100f;
+    [SerializeField] public float fieldOfViewTransitionSpeed = 0.5f;
     void Start()
     {
         // Le joueur démarre avec un cachet
         hasCachet = true;
         isRunning = false;
 
+        camera = GetComponentInChildren<Camera>();
         playerController = GetComponent<PlayerController>();
         gameOver = GetComponent<GameOverConditions>();
         oxygen = GetComponent<Oxygen>();
@@ -40,12 +46,34 @@ public class PlayerStats : MonoBehaviour
         cachet = GetComponent<Cachet>();
 
         StartCoroutine(DecreaseSpeedOvertime());
+
+        Debug.Log(camera.fieldOfView);
     }
 
     void Update()
     {
         playerController.forwardSpeed = movementSpeed;
         //StartCoroutine(PlayerAudio());
+         if (playerController.forwardSpeed < value_1)
+        {
+            camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, fieldOfViewMin, fieldOfViewTransitionSpeed * Time.deltaTime);
+            Debug.Log(camera.fieldOfView);
+        }
+        else if (playerController.forwardSpeed >= value_1 && playerController.forwardSpeed <= value_2)
+        {
+            camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, fieldOfViewB, fieldOfViewTransitionSpeed * Time.deltaTime);
+            Debug.Log(camera.fieldOfView);
+        }
+        else if (playerController.forwardSpeed >= value_2 && playerController.forwardSpeed <= value_3)
+        {
+            camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, fieldOfViewC, fieldOfViewTransitionSpeed * Time.deltaTime);
+            Debug.Log(camera.fieldOfView);
+        }
+        else if (playerController.forwardSpeed >= value_3 && playerController.forwardSpeed <= value_4)
+        {
+            camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, fieldOfViewMax, fieldOfViewTransitionSpeed * Time.deltaTime);
+            Debug.Log(camera.fieldOfView);
+        }
     }
     IEnumerator DecreaseSpeedOvertime()
     {
