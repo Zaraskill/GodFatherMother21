@@ -125,6 +125,10 @@ public class PlayerController : MonoBehaviour
             oldMan = other.gameObject.GetComponent<OldPerson>();
             StartQTE();
         }
+        if (other.tag.Equals("Ending"))
+        {
+            Time.timeScale = 0;
+        }
     }
 
     private void OnTriggerExit(Collider other)
