@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class UI_Boosts : MonoBehaviour
 {
     public DoorManager doorManager;
-    //public PlayerStats playerStats;
-    //public Pacemaker pacemaker;
-    //public Cachet cachet;
-    //public Oxygen oxygene;
+    public PlayerStats playerStats;
+    public Pacemaker pacemaker;
+    public Cachet cachet;
+    public Oxygen oxygene;
     [SerializeField] private Image warningOpeningImage;
     [SerializeField] private Image warningClosingImage;
 
@@ -68,11 +68,11 @@ public class UI_Boosts : MonoBehaviour
         #endregion
 
         #region Pacemaker Update
-        /*if (playerStats.hasPacemaker)
+        if (playerStats.hasPacemaker)
         {
-            A DECOMMENTER QUAND INTEGRATION
+            
             EnablePacemaker();
-        }*/
+        }
 
         if (fadePacemaker)
         {
@@ -88,11 +88,11 @@ public class UI_Boosts : MonoBehaviour
         #endregion
 
         #region Cachet Update
-        /*if(!playerStats.hasCachet && firstTimeCachet)
+        if(!playerStats.hasCachet && firstTimeCachet)
         {
             firstTimeCachet = false;
             cachetUsed = true;
-        }*/
+        }
 
         if (cachetUsed)
         {
@@ -100,19 +100,20 @@ public class UI_Boosts : MonoBehaviour
             cachetUsed = false;
         }
 
-        /*if(playerStats.hasCachet)
+        if(playerStats.hasCachet)
         {
             cachetGo.SetActive(true);
         }
         else
         {
             cachetGo.SetActive(false);
-        }*/
+        }
         #endregion
 
         #region Oxygene Update
-        /*if (oxygene.hasOxygenBuff)
+        if (oxygene.hasOxygenBuff)
         {
+            Debug.Log("Coucou");
             timerWarningOpening += Time.deltaTime;
             iconOxygen.color = new Color(iconOxygen.color.r, iconOxygen.color.g, iconOxygen.color.b, Mathf.PingPong(timerOxygene, 0.75f));
         }
@@ -120,7 +121,7 @@ public class UI_Boosts : MonoBehaviour
         {
             timerOxygene = 0;
             iconOxygen.color = new Color(iconOxygen.color.r, iconOxygen.color.g, iconOxygen.color.b, 1);
-        }*/
+        }
         #endregion
 
         #region WorldPosOxygen
@@ -174,7 +175,7 @@ public class UI_Boosts : MonoBehaviour
     {
         StartCoroutine("PaceMaker");
     }
-    /*IEnumerator PaceMaker()
+    IEnumerator PaceMaker()
     {
         iconPacemaker.enabled = true;
         yield return new WaitForSeconds((pacemaker.buffTimer * 2) / 3);
@@ -183,7 +184,7 @@ public class UI_Boosts : MonoBehaviour
         iconPacemaker.enabled = false;
         fadePacemaker = false;
         iconPacemaker.color = new Color(iconPacemaker.color.r, iconPacemaker.color.g, iconPacemaker.color.b, 1);
-    }*/
+    }
     #endregion
 
     #region Cachet
@@ -197,11 +198,11 @@ public class UI_Boosts : MonoBehaviour
 
     #region WorldPosOxygen
     public void SetupOxygenValue()
-    {/*
+    {
         int oxygenValue;
         oxygenValue = (int)oxygene.oxygenCapacity;
         worldPosOxygenSlider.value = oxygenValue;
-        worldPosOxygen.color = worldPosOxygenColorGradient.Evaluate(worldPosOxygenSlider.normalizedValue);*/
+        worldPosOxygen.color = worldPosOxygenColorGradient.Evaluate(worldPosOxygenSlider.normalizedValue);
     }
     #endregion
 }

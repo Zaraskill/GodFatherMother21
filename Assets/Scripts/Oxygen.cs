@@ -20,7 +20,7 @@ public class Oxygen : MonoBehaviour
     [SerializeField] bool refillOxygenCapacity;
     private float initialOxygenCapacity;
     private float initialBuffTimer;
-    [HideInInspector] public bool hasOxygenBuff;
+    public bool hasOxygenBuff;
     void Start()
     {
         initialBuffTimer = buffTimer;
@@ -33,6 +33,7 @@ public class Oxygen : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(hasOxygenBuff);
         if (!gameOverConditions.hasLost)
         {
             if (playerStats.hasOxygen) Debug.Log("Oxygen Available");
@@ -86,7 +87,7 @@ public class Oxygen : MonoBehaviour
                         StartCoroutine(StartChrono());
                         Debug.Log("Oxygen Used !");
                         oxygenCapacity -= oxygenCapacityDecreaseValue;
-                        Debug.Log("Oxygen Capacity: " + oxygenCapacity);
+                        //Debug.Log("Oxygen Capacity: " + oxygenCapacity);
                         hasOxygenBuff = true;
                     }
                     else break;
